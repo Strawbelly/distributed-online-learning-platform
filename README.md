@@ -5,3 +5,12 @@
 - Reduced MySQL write frequency and volume by approximately **95%** by persisting only the latest meaningful playback progress.
 
 <img width="4391" height="3026" alt="3" src="https://github.com/user-attachments/assets/f833a35e-2c9e-4079-bb09-8f1dfa1c3b21" />
+
+### High-Concurrency Coupon Claiming
+
+- Built a reusable distributed locking framework with **Spring AOP, Redisson, and custom annotations**, using **Factory and Strategy patterns** to decouple concurrency control from business logic and support **4 lock types and 5 lock-acquisition strategies**.
+- Redesigned the coupon-claiming workflow with **Redis and Lua**, moving stock validation and updates into an atomic Lua script to prevent concurrent requests from overselling coupon inventory.
+- Used **RabbitMQ** to move database persistence out of the synchronous request path, reducing the amount of work performed during coupon claiming.
+- Improved successful coupon allocation under concurrent load from **21/100 to 100/100** without overselling.
+
+<img width="3179" height="2100" alt="5" src="https://github.com/user-attachments/assets/4fe1eff8-bc89-44f8-a914-9abb729e3dca" />
